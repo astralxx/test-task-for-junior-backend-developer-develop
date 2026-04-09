@@ -5,6 +5,28 @@
 
 ---
 
+## 🚀 Быстрый запуск (Docker Compose)
+
+### Требования
+
+- Go 1.23+
+- Docker и Docker Compose
+
+### Запуск
+
+```bash
+docker compose up --build
+```
+
+### Если PostgreSQL уже запускался раньше со старой схемой
+
+```bash
+docker compose down -v
+docker compose up --build
+```
+
+---
+
 ## ✨ Возможности
 
 - 🧩 CRUD операции над задачами  
@@ -41,5 +63,6 @@ curl -X POST http://localhost:8080/api/v1/tasks \
     "status": "new",
     "recurrence_type": "daily",
     "recurrence_interval": 2,
+```
     "recurrence_end_date": "2026-12-31T23:59:59Z"
   }'
