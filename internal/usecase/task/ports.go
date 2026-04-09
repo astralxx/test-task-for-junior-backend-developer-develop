@@ -25,11 +25,9 @@ type Usecase interface {
 }
 
 type CreateInput struct {
-	Title       string
-	Description string
-	Status      taskdomain.Status
-
-	// Поля периодичности
+	Title              string
+	Description        string
+	Status             taskdomain.Status
 	RecurrenceType     *taskdomain.RecurrenceType
 	RecurrenceInterval *int
 	RecurrenceDates    []string

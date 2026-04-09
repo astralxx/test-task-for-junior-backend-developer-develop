@@ -22,14 +22,12 @@ const (
 )
 
 type Task struct {
-	ID          int64     `json:"id"`
-	Title       string    `json:"title"`
-	Description string    `json:"description"`
-	Status      Status    `json:"status"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
-
-	// я добавил поля периодичности НО ТОЛЬКО ДЛЯ ШАБЛОНОВ
+	ID                 int64           `json:"id"`
+	Title              string          `json:"title"`
+	Description        string          `json:"description"`
+	Status             Status          `json:"status"`
+	CreatedAt          time.Time       `json:"created_at"`
+	UpdatedAt          time.Time       `json:"updated_at"`
 	RecurrenceType     *RecurrenceType `json:"recurrence_type,omitempty"`
 	RecurrenceInterval *int            `json:"recurrence_interval,omitempty"`
 	RecurrenceDates    []string        `json:"recurrence_dates,omitempty"` // для specific_dates

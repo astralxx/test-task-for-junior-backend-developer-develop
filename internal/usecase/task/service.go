@@ -147,11 +147,9 @@ func validateUpdateInput(input UpdateInput) (UpdateInput, error) {
 	return input, nil
 }
 
-// GenerateRecurringTasks создаёт список задач на основе шаблона периодичности
 func GenerateRecurringTasks(input CreateInput, now time.Time) ([]*taskdomain.Task, error) {
 	var tasks []*taskdomain.Task
 
-	// Определяем конечную дату: если не указана, генерируем на 1 год вперёд
 	endDate := input.RecurrenceEndDate
 	if endDate == nil {
 		oneYear := now.AddDate(1, 0, 0)
@@ -167,7 +165,6 @@ func GenerateRecurringTasks(input CreateInput, now time.Time) ([]*taskdomain.Tas
 
 	case taskdomain.RecurrenceMonthly:
 		dayOfMonth := *input.RecurrenceInterval
-		// Начинаем с текущего месяца, но не раньше today
 		year, month, _ := now.Date()
 		current := time.Date(year, month, dayOfMonth, 0, 0, 0, 0, time.UTC)
 		if current.Before(now) {
@@ -179,7 +176,6 @@ func GenerateRecurringTasks(input CreateInput, now time.Time) ([]*taskdomain.Tas
 		}
 
 	case taskdomain.RecurrenceParity:
-		// 0 = чётные дни месяца, 1 = нечётные
 		parity := *input.RecurrenceInterval
 		for d := now; !d.After(*endDate); d = d.AddDate(0, 0, 1) {
 			if (d.Day()%2 == 0 && parity == 0) || (d.Day()%2 == 1 && parity == 1) {
